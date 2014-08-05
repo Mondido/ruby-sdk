@@ -8,11 +8,9 @@ module MondidoSDK
         raise 'Could not find app/mondido.yml'
       end
 
-      private
-      
-      @@merchant_id = yaml['merchant_id'] or raise 'Mondido merchant ID not set in config/mondido.yml'
-      @@secret = yaml['secret'] or raise 'Mondido secret not set in config/mondido.yml'
-      @@password = yaml['password'] or raise 'Mondido password not set in config/mondido.yml'
+      MERCHANT_ID ||= yaml['merchant_id'] or raise 'Mondido merchant ID not set in config/mondido.yml'
+      SECRET ||= yaml['secret'] or raise 'Mondido secret not set in config/mondido.yml'
+      PASSWORD ||= yaml['password'] or raise 'Mondido password not set in config/mondido.yml'
     end
   end
 end

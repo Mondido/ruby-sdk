@@ -1,7 +1,6 @@
-
 module MondidoSDK
-  module Transaction
-    class CreditCardPayment < MondidoModel
+  module CreditCard
+    class Transaction < BaseModel
       include MondidoSDK::Config
       include ActiveModel::Model
 
@@ -26,7 +25,8 @@ module MondidoSDK
                     :stored_card,
                     :customer,
                     :subscription,
-                    :payment_details
+                    :payment_details,
+                    :hash
 
       validates :currency,
                 presence: { message: 'errors.currency.missing' }
@@ -48,27 +48,27 @@ module MondidoSDK
 
 
 
-      def self.create(attributes)
-        transaction = MondidoSDK::Transaction::CreditCardPayment.new(attributes)
-        return transaction unless transaction.valid?
+      def initialize(attributes)
+        super(attributes)
+        return unless valid?
 
-        unhashed = [@@merchant_id, attributes[:payment_ref], attributes[:amount], attributes[:currency], @@secret]
-        attributes['hash'] = Digest::MD5.hexdigest(unhashed.join)
-        uri = URI.parse 'http://api.localmondido.com:3000/v1/transactions?extend=payment_details'
-        http = Net::HTTP.new(uri.host, uri.port)
-        # http.use_ssl = true
-        request = Net::HTTP::Post.new(uri.path)
-        request.basic_auth(@@merchant_id, @@password)
-        request.set_form_data(attributes)
-        response = http.start { |http| http.request(request) }
+        unhashed = [MondidoSDK::Config::MERCHANT_ID, payment_ref, amount, currency, MondidoSDK::Config::SECRET]
+        self.hash = Digest::MD5.hexdigest(unhashed.join)
+
+        response = MondidoSDK::RestClient.process(self)
+
 
         if (200..299).include?(response.code.to_i)
-          transaction.update_from_response(JSON.parse(response.body))
+          update_from_response(JSON.parse(response.body))
         else
-          transaction.errors.add(:response, 'errorous')
+          errors.add(:response, 'errorous')
         end
-        return transaction
       end
+
+      def success?
+        status == 'approved'
+      end
+
     end
   end
 end
