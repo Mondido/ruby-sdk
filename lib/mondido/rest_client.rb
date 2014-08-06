@@ -2,23 +2,12 @@ module Mondido
   class RestClient
 
     def self.process(object)
-      if object.is_a? Mondido::CreditCard::Transaction
-        process_transaction(object)
-      elsif object.is_a? Mondido::StoredCard
-        process_stored_card(object)
-      end
-    end
-
-    private
-
-    def self.process_transaction(object)
-      uri_string = [Mondido::Config::URI, 'transactions'].join('/')
+      pluralized = object.class.name.split('::').last.underscore.pluralize
+      uri_string = [Mondido::Config::URI, pluralized].join('/')
       call_api(uri: uri_string, data: object.api_params, http_method: :post)
     end
 
-    def self.process_stored_card(object)
-      call_api(:stored_cards, object.api_params)
-    end
+    private
 
     def self.call_api(args)
       require 'net/https'

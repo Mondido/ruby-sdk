@@ -1,0 +1,10 @@
+{
+  "amount" : "1.0",
+  "reason" : "Because of test",
+  "ref" : null,
+  "id" : 49,
+  "created_at" : "2014-08-04T18:04:21Z",
+  "transaction" : {
+    "id" : 200
+  }
+}

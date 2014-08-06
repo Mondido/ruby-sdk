@@ -3,36 +3,65 @@ require 'spec_helper'
 describe Mondido::CreditCard::Transaction do
 
   context 'get transaction' do
+    before(:all) do
+      uri = URI.parse(Mondido::Config::URI + '/transactions/200')
+      uri.user = Mondido::Credentials::MERCHANT_ID.to_s
+      uri.password = Mondido::Credentials::PASSWORD.to_s
+      json_transaction = File.read('spec/stubs/transaction.json')
+      @transaction_hash = JSON.parse(json_transaction)
+
+      stub_request(:get, uri.to_s)
+        .to_return(status: 200, body: json_transaction, headers: {})
+
+      json_error = {
+        code: 128,
+        name: 'errors.transaction.not_found',
+        description: 'Transaction not found'
+      }
+      uri.path = '/transactions/201'
+      stub_request(:get, uri.to_s)
+        .to_return(status: 404, body: json_error, headers: {})
+
+      @transaction = Mondido::CreditCard::Transaction.get(200)
+    end
+
     context 'valid call' do
-
-      before(:all) do
-        uri = URI.parse(Mondido::Config::URI + '/transactions/200')
-        uri.user = Mondido::Credentials::MERCHANT_ID.to_s
-        uri.password = Mondido::Credentials::PASSWORD.to_s
-        json_transaction = File.read('spec/stubs/transaction.json')
-        @transacion_hash = JSON.parse(json_transaction)
-        stub_request(:get, uri.to_s)
-          .to_return(status: 200, body: json_transaction, headers: {})
-
-        @transaction = Mondido::CreditCard::Transaction.get(200)
-      end
 
       it 'returns a CreditCard::Transaction' do
         expect(@transaction).to be_an_instance_of(Mondido::CreditCard::Transaction)
       end
 
       it 'has the correct amount' do
-        expect(@transaction.amount).to eq(@transacion_hash['amount'])
+        expect(@transaction.amount).to eq(@transaction_hash['amount'])
       end
 
       it 'has the correct payment_ref' do
-        expect(@transaction.payment_ref).to eq(@transacion_hash['payment_ref'])
+        expect(@transaction.payment_ref).to eq(@transaction_hash['payment_ref'])
       end
 
     end
 
     context 'invalid call' do
+      before(:all) do
 
+        uri = URI.parse(Mondido::Config::URI + '/transactions/201')
+        uri.user = Mondido::Credentials::MERCHANT_ID.to_s
+        uri.password = Mondido::Credentials::PASSWORD.to_s
+
+        json_error = {
+          code: 128,
+          name: 'errors.transaction.not_found',
+          description: 'Transaction not found'
+        }.to_json
+        stub_request(:get, uri.to_s)
+          .to_return(status: 404, body: json_error, headers: {})
+
+      end
+      it 'raises ApiException errors.transaction.not_found' do
+        expect{
+          Mondido::CreditCard::Transaction.get(201)
+        }.to raise_error(Mondido::Exceptions::ApiException, 'errors.transaction.not_found')
+      end
     end
 
   end

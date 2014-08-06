@@ -34,25 +34,27 @@ module Mondido
 
 
 
-    def initialize(attributes)
+    def initialize(attributes={})
       super(attributes)
-      return unless valid?
-
-      unhashed = [Mondido::Config::MERCHANT_ID, payment_ref, amount, currency, Mondido::Config::SECRET]
-      self.hash = Digest::MD5.hexdigest(unhashed.join)
-
-      response = Mondido::RestClient.process(self)
-
-
-      if (200..299).include?(response.code.to_i)
-        update_from_response(JSON.parse(response.body))
-      else
-        errors.add(:response, 'errorous')
-      end
     end
 
-    def success?
-      status == 'approved'
+    def self.create(attributes)
+      stored_card = Mondido::StoredCard.new(attributes)
+      stored_card.valid? # Will raise exception if validation fails
+
+      #unhashed = [Mondido::Credentials::MERCHANT_ID, stored_card.payment_ref, stored_card.amount, stored_card.currency, Mondido::Credentials::SECRET]
+      #stored_card.hash = Digest::MD5.hexdigest(unhashed.join)
+
+      response = Mondido::RestClient.process(stored_card)
+
+
+      stored_card.update_from_response(JSON.parse(response.body))
+    end
+
+    def self.get(id)
+      response = Mondido::RestClient.get(:stored_cards, id)
+      stored_card = Mondido::StoredCard.new
+      stored_card.update_from_response(JSON.parse(response.body))
     end
 
   end

@@ -6,6 +6,7 @@ module Mondido
   require 'mondido/rest_client'
   require 'mondido/base_model'
   require 'mondido/credit_card/transaction'
+  require 'mondido/credit_card/refund'
   require 'mondido/stored_card'
 
   class Railtie < Rails::Railtie
