@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    mondido (0.0.1)
+    Mondido SDK (0.0.1)
       rails (~> 4)
 
 GEM
@@ -107,6 +107,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  mondido!
+  Mondido SDK!
   rspec
   webmock

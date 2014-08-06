@@ -7,7 +7,7 @@ module Mondido
   require 'mondido/base_model'
   require 'mondido/credit_card/transaction'
   require 'mondido/credit_card/refund'
-  require 'mondido/stored_card'
+  require 'mondido/credit_card/stored_card'
 
   class Railtie < Rails::Railtie
     initializer 'require credentials after rails is initialized' do

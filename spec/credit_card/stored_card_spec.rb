@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mondido::StoredCard do
+describe Mondido::CreditCard::StoredCard do
   context '#get' do
     context 'valid call' do
       before(:all) do
@@ -12,11 +12,11 @@ describe Mondido::StoredCard do
         stub_request(:get, uri.to_s)
           .to_return(status: 200, body: json_stored_card, headers: {})
 
-        @stored_card = Mondido::StoredCard.get(300)
+        @stored_card = Mondido::CreditCard::StoredCard.get(300)
       end
 
       it 'returns a StoredCard' do
-        expect(@stored_card).to be_an_instance_of(Mondido::StoredCard)
+        expect(@stored_card).to be_an_instance_of(Mondido::CreditCard::StoredCard)
       end
 
       it 'has the correct currency' do
@@ -56,11 +56,11 @@ describe Mondido::StoredCard do
 
     context 'valid' do
       before(:all) do
-        @stored_card = Mondido::StoredCard.create(@attributes)
+        @stored_card = Mondido::CreditCard::StoredCard.create(@attributes)
       end
 
-      it 'is a Mondido::StoredCard' do
-        expect(@stored_card).to be_an_instance_of(Mondido::StoredCard)
+      it 'is a Mondido::CreditCard::StoredCard' do
+        expect(@stored_card).to be_an_instance_of(Mondido::CreditCard::StoredCard)
       end
 
       it 'has the correct card_holder' do
