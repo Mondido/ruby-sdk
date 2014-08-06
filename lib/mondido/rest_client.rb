@@ -2,8 +2,7 @@ module Mondido
   class RestClient
 
     def self.process(object)
-      pluralized = object.class.name.split('::').last.underscore.pluralize
-      uri_string = [Mondido::Config::URI, pluralized].join('/')
+      uri_string = [Mondido::Config::URI, object.class.pluralized].join('/')
       call_api(uri: uri_string, data: object.api_params, http_method: :post)
     end
 
