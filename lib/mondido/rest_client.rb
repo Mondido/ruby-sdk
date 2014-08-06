@@ -1,9 +1,12 @@
 module Mondido
   class RestClient
 
-    def self.process(object)
-      uri_string = [Mondido::Config::URI, object.class.pluralized].join('/')
-      call_api(uri: uri_string, data: object.api_params, http_method: :post)
+    # @param instance [Mondido::*]
+    # @return [Mondido::*]
+    # Takes an instance of a Mondido object and calls the API to process the transaction
+    def self.process(instance)
+      uri_string = [Mondido::Config::URI, instance.class.pluralized].join('/')
+      call_api(uri: uri_string, data: instance.api_params, http_method: :post)
     end
 
     private

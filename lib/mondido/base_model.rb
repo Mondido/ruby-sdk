@@ -1,5 +1,9 @@
 module Mondido
   class BaseModel
+
+    # @param attributes [Hash]
+    # @return [Mondido::*]
+    # Takes the JSON response from the API and sets white listed properties for the instance
     def update_from_response(attributes)
       attributes.each do |attribute, value|
         attribute_symbol = "@#{attribute}".to_sym          
@@ -10,6 +14,8 @@ module Mondido
       return self
     end
 
+    # @return [Hash]
+    # Returns a sanitized hash suitable for posting to the API
     def api_params
       excluded = %w(@errors @validation_context).map(&:to_sym)
       hash = {}
@@ -22,7 +28,9 @@ module Mondido
 
     # Class Methods
 
-
+    # @param attributes [Hash]
+    # @return [Mondido::*]
+    # Creates a transaction and posts it to the API
     def self.create(attributes)
       object = self.new(attributes)
       object.valid? # Will raise exception if validation fails
@@ -34,13 +42,18 @@ module Mondido
       object.update_from_response(JSON.parse(response.body))
     end
 
-
+    # @param id [Integer]
+    # @return [Mondido::*]
+    # Retrieves an object from the API, by ID
     def self.get(id)
       response = Mondido::RestClient.get(pluralized, id)
       object = self.new
       object.update_from_response(JSON.parse(response.body))
     end
 
+    # @param filter [Hash] :limit, :offset
+    # @return [Array]
+    # Retrieves a list of objects from the API
     def self.all(filter={})
       response = Mondido::RestClient.all(pluralized, filter)
       JSON.parse(response.body).map do |attributes|
@@ -51,6 +64,9 @@ module Mondido
 
     private
 
+    # @return [String]
+    # Returns a camel cased pluralized version of the class name
+    # e.g. converts Mondido::CreditCard::StoredCard to 'stored_cards'
     def self.pluralized
       self.name.split('::').last.underscore.pluralize
     end

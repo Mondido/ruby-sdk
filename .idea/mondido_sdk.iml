@@ -199,7 +199,7 @@
     <orderEntry type="jdk" jdkName="ruby-2.0.0-p251" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
-      <library name="mondido (v0.0.1, /Users/robert/development/gems/mondido) [path][gem]">
+      <library name="Mondido SDK (v0.0.1, /Users/robert/development/gems/mondido) [path][gem]">
         <CLASSES>
           <root url="file://$MODULE_DIR$/lib" />
           <root url="file://$MODULE_DIR$/.idea" />
