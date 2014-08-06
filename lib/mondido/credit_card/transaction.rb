@@ -62,23 +62,11 @@ module Mondido
         super
       end
 
-      def self.create(attributes)
-        transaction = Mondido::CreditCard::Transaction.new(attributes)
-        transaction.valid? # Will raise exception if validation fails
-
-        unhashed = [Mondido::Credentials::MERCHANT_ID, transaction.payment_ref, transaction.amount, transaction.currency, Mondido::Credentials::SECRET]
-        transaction.hash = Digest::MD5.hexdigest(unhashed.join)
-
-        response = Mondido::RestClient.process(transaction)
-
-        transaction.update_from_response(JSON.parse(response.body))
+      def set_hash!
+        unhashed = [Mondido::Credentials::MERCHANT_ID, payment_ref, amount, currency, Mondido::Credentials::SECRET]
+        self.hash = Digest::MD5.hexdigest(unhashed.join)
       end
 
-      def self.get(id)
-        response = Mondido::RestClient.get(:transactions, id)
-        transaction = Mondido::CreditCard::Transaction.new
-        transaction.update_from_response(JSON.parse(response.body))
-      end
     end
   end
 end

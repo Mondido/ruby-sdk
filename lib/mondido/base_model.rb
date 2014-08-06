@@ -19,5 +19,33 @@ module Mondido
       end
       return hash
     end
+
+    # Class Methods
+
+
+    def self.create(attributes)
+      object = self.new(attributes)
+      object.valid? # Will raise exception if validation fails
+
+      object.set_hash! if object.respond_to? :set_hash!
+
+      response = Mondido::RestClient.process(object)
+
+      object.update_from_response(JSON.parse(response.body))
+    end
+
+
+    def self.get(id)
+      response = Mondido::RestClient.get(pluralized, id)
+      object = self.new
+      object.update_from_response(JSON.parse(response.body))
+    end
+
+    private
+
+    def self.pluralized
+      self.name.split('::').last.underscore.pluralize
+    end
+
   end
 end

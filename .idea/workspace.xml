@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1859fb3c-ffcd-46cd-81b9-607f65bd74bf" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/spec/stored_card.rb" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mondido/credit_card/credit_card.rb" afterPath="$PROJECT_DIR$/lib/mondido/credit_card/credit_card.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mondido.rb" afterPath="$PROJECT_DIR$/lib/mondido.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mondido_sdk.iml" afterPath="$PROJECT_DIR$/.idea/mondido_sdk.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mondido/rest_client.rb" afterPath="$PROJECT_DIR$/lib/mondido/rest_client.rb" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/mondido/credit_card/credit_card.rb" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mondido/base_model.rb" afterPath="$PROJECT_DIR$/lib/mondido/base_model.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mondido/credit_card/refund.rb" afterPath="$PROJECT_DIR$/lib/mondido/credit_card/refund.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mondido/stored_card.rb" afterPath="$PROJECT_DIR$/lib/mondido/stored_card.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/credit_card/transaction_spec.rb" afterPath="$PROJECT_DIR$/spec/credit_card/transaction_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/mondido/credit_card/transaction.rb" afterPath="$PROJECT_DIR$/lib/mondido/credit_card/transaction.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mondido_sdk.iws" />
@@ -22,7 +20,7 @@
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/mondido_sdk@Run_spec__refund_spec___mondido_sdk.coverage" NAME="Run spec 'refund_spec': mondido_sdk Coverage Results" MODIFIED="1407334918232" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mondido_sdk" />
-    <SUITE FILE_PATH="coverage/mondido_sdk@Mondido__CreditCard__Transaction_get_transaction_valid_call_returns_a_CreditCard__Transaction__mondido_sdk.coverage" NAME="Mondido::CreditCard::Transaction get transaction valid call returns a CreditCard::Transaction: mondido_sdk Coverage Results" MODIFIED="1407332507783" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mondido_sdk" />
+    <SUITE FILE_PATH="coverage/mondido_sdk@Mondido__CreditCard__Transaction_get_transaction_valid_call_returns_a_CreditCard__Transaction__mondido_sdk.coverage" NAME="Mondido::CreditCard::Transaction get transaction valid call returns a CreditCard::Transaction: mondido_sdk Coverage Results" MODIFIED="1407335502362" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mondido_sdk" />
     <SUITE FILE_PATH="coverage/mondido_sdk@Mondido__StoredCard_get_valid_call_has_the_correct_currency__mondido_sdk.coverage" NAME="Mondido::StoredCard#get valid call has the correct currency: mondido_sdk Coverage Results" MODIFIED="1407332289425" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mondido_sdk" />
     <SUITE FILE_PATH="coverage/mondido_sdk@Mondido__CreditCard__Transaction_get_transaction_invalid_call_raises_ApiException_errors_transaction_not_found__mondido_sdk.coverage" NAME="Mondido::CreditCard::Transaction get transaction invalid call raises ApiException errors.transaction.not_found: mondido_sdk Coverage Results" MODIFIED="1407332969072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mondido_sdk" />
     <SUITE FILE_PATH="coverage/mondido_sdk@MondidoSDK__CreditCard__Transaction_invalid_transaction_raises_ValidationException_errors_card_type_missing__mondido_sdk.coverage" NAME="MondidoSDK::CreditCard::Transaction invalid transaction raises ValidationException errors.card_type.missing: mondido_sdk Coverage Results" MODIFIED="1407245297754" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="mondido_sdk" />
@@ -50,31 +48,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="refund_spec.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spec/credit_card/refund_spec.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
-              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="refund.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/mondido/credit_card/refund.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="780">
-              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="rest_client.rb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/mondido/rest_client.rb">
+      <file leaf-file-name="stored_card.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/mondido/stored_card.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2027027" vertical-offset="0" max-vertical-offset="814">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.62653565" vertical-offset="0" max-vertical-offset="814">
+              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="transaction.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/mondido/credit_card/transaction.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="281" max-vertical-offset="1170">
+              <caret line="65" column="76" selection-start-line="65" selection-start-column="76" selection-end-line="65" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base_model.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/mondido/base_model.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="855">
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -93,14 +101,16 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/lib/mondido/stored_card.rb" />
         <option value="$PROJECT_DIR$/spec/stored_card_spec.rb" />
         <option value="$PROJECT_DIR$/spec/credit_card/transaction_spec.rb" />
         <option value="$PROJECT_DIR$/lib/mondido.rb" />
         <option value="$PROJECT_DIR$/lib/mondido/credit_card/credit_card.rb" />
-        <option value="$PROJECT_DIR$/lib/mondido/credit_card/refund.rb" />
         <option value="$PROJECT_DIR$/spec/credit_card/refund_spec.rb" />
         <option value="$PROJECT_DIR$/lib/mondido/rest_client.rb" />
+        <option value="$PROJECT_DIR$/lib/mondido/credit_card/transaction.rb" />
+        <option value="$PROJECT_DIR$/lib/mondido/base_model.rb" />
+        <option value="$PROJECT_DIR$/lib/mondido/credit_card/refund.rb" />
+        <option value="$PROJECT_DIR$/lib/mondido/stored_card.rb" />
       </list>
     </option>
   </component>
@@ -218,6 +228,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mondido_sdk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mondido" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="spec" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="credit_card" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mondido_sdk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mondido" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -275,7 +317,7 @@
     <property name="recentsLimit" value="5" />
     <property name="FullScreen" value="false" />
   </component>
-  <component name="RunManager" selected="RSpec.Run spec 'refund_spec': mondido_sdk">
+  <component name="RunManager" selected="RSpec.Mondido::CreditCard::Transaction get transaction valid call returns a CreditCard::Transaction: mondido_sdk">
     <configuration default="false" name="Mondido::StoredCard#get valid call returns a StoredCard: mondido_sdk" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="mondido_sdk" />
@@ -531,9 +573,9 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="RSpec.Run spec 'refund_spec': mondido_sdk" />
-        <item index="1" class="java.lang.String" itemvalue="RSpec.Mondido::CreditCard::Transaction get transaction invalid call raises ApiException errors.transaction.not_found: mondido_sdk" />
-        <item index="2" class="java.lang.String" itemvalue="RSpec.Mondido::CreditCard::Transaction get transaction valid call returns a CreditCard::Transaction: mondido_sdk" />
+        <item index="0" class="java.lang.String" itemvalue="RSpec.Mondido::CreditCard::Transaction get transaction valid call returns a CreditCard::Transaction: mondido_sdk" />
+        <item index="1" class="java.lang.String" itemvalue="RSpec.Run spec 'refund_spec': mondido_sdk" />
+        <item index="2" class="java.lang.String" itemvalue="RSpec.Mondido::CreditCard::Transaction get transaction invalid call raises ApiException errors.transaction.not_found: mondido_sdk" />
         <item index="3" class="java.lang.String" itemvalue="RSpec.Mondido::StoredCard#get valid call has the correct currency: mondido_sdk" />
         <item index="4" class="java.lang.String" itemvalue="RSpec.Mondido::StoredCard#get valid call returns a StoredCard: mondido_sdk" />
       </list>
@@ -608,11 +650,6 @@
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/lib/mondido/rest_client.rb</url>
-          <line>26</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/spec/credit_card/refund_spec.rb</url>
           <line>5</line>
           <option name="timeStamp" value="44" />
@@ -622,13 +659,8 @@
           <line>6</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/lib/mondido/rest_client.rb</url>
-          <line>4</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="47" />
+      <option name="time" value="49" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -797,42 +829,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/mondido/stored_card.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9088639" vertical-offset="112" max-vertical-offset="1005">
-          <caret line="56" column="16" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/mondido/credit_card/transaction.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6441948" vertical-offset="549" max-vertical-offset="1350">
-          <caret line="71" column="42" selection-start-line="71" selection-start-column="42" selection-end-line="71" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/credit_card/transaction_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55282557" vertical-offset="360" max-vertical-offset="2685">
-          <caret line="54" column="16" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/spec/stored_card_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4054054" vertical-offset="0" max-vertical-offset="1215">
           <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/mondido/credit_card/credit_card.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.07371008" vertical-offset="0" max-vertical-offset="814">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -845,26 +845,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/mondido/credit_card/refund.rb">
+    <entry file="file://$PROJECT_DIR$/lib/mondido/rest_client.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="780">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.38697788" vertical-offset="0" max-vertical-offset="814">
+          <caret line="21" column="47" selection-start-line="21" selection-start-column="47" selection-end-line="21" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/credit_card/refund_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="600">
+        <state vertical-scroll-proportion="0.11056511" vertical-offset="0" max-vertical-offset="814">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/mondido/rest_client.rb">
+    <entry file="file://$PROJECT_DIR$/spec/credit_card/transaction_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2027027" vertical-offset="0" max-vertical-offset="814">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.42383292" vertical-offset="15" max-vertical-offset="2685">
+          <caret line="24" column="56" selection-start-line="24" selection-start-column="56" selection-end-line="24" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/mondido/base_model.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="855">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/mondido/credit_card/transaction.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="281" max-vertical-offset="1170">
+          <caret line="65" column="76" selection-start-line="65" selection-start-column="76" selection-end-line="65" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/mondido/credit_card/refund.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/mondido/stored_card.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62653565" vertical-offset="0" max-vertical-offset="814">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
           <folding />
         </state>
       </provider>
