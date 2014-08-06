@@ -5,7 +5,7 @@ require "mondido/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = "Mondido SDK"
+  s.name        = "mondido"
   s.version     = Mondido::VERSION
   s.authors     = ["Robert Falkén"]
   s.email       = ["falken@mondido.com"]
