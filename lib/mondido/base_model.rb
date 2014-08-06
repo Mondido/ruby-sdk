@@ -41,6 +41,14 @@ module Mondido
       object.update_from_response(JSON.parse(response.body))
     end
 
+    def self.all(filter={})
+      response = Mondido::RestClient.all(pluralized, filter)
+      JSON.parse(response.body).map do |attributes|
+        object = self.new
+        object.update_from_response(attributes)
+      end
+    end
+
     private
 
     def self.pluralized

@@ -2,6 +2,26 @@ require 'spec_helper'
 
 describe Mondido::CreditCard::Transaction do
 
+  context 'list transactions' do
+    before(:all) do
+      uri = URI.parse(Mondido::Config::URI + '/transactions')
+      uri.user = Mondido::Credentials::MERCHANT_ID.to_s
+      uri.password = Mondido::Credentials::PASSWORD.to_s
+      json_transactions = File.read('spec/stubs/transactions.json')
+      @transactions_array = JSON.parse(json_transactions)
+
+      stub_request(:get, uri.to_s)
+        .with(body: {limit: '2', offset: '1'})
+        .to_return(status: 200, body: json_transactions, headers: {})
+
+      @transactions = Mondido::CreditCard::Transaction.all(limit: 2, offset: 1)
+    end
+
+    it 'lists transactions' do
+      expect(@transactions.first).to be_an_instance_of(Mondido::CreditCard::Transaction)
+    end
+  end
+
   context 'get transaction' do
     before(:all) do
       uri = URI.parse(Mondido::Config::URI + '/transactions/200')
@@ -138,7 +158,7 @@ describe Mondido::CreditCard::Transaction do
         attributes[:card_cvv] = '201'
 
         expect{
-          transaction = Mondido::CreditCard::Transaction.create(attributes)
+          Mondido::CreditCard::Transaction.create(attributes)
         }.to raise_error(Mondido::Exceptions::ApiException, 'errors.payment.declined')
       end
 

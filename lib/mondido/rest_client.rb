@@ -34,7 +34,12 @@ module Mondido
 
     def self.get(method, id=nil)
       uri_string = [Mondido::Config::URI, method.to_s, id.to_s].join('/')
-      call_api(uri: uri_string, method: :get)
+      call_api(uri: uri_string)
+    end
+
+    def self.all(method, filter)
+      uri_string = [Mondido::Config::URI, method.to_s].join('/')
+      call_api(uri: uri_string, data: filter)
     end
 
   end
