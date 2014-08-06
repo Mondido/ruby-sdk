@@ -1,0 +1,144 @@
+require 'spec_helper'
+
+describe Mondido::CreditCard::Transaction do
+
+  context 'get transaction' do
+    context 'valid call' do
+
+      before(:all) do
+        uri = URI.parse(Mondido::Config::URI + '/transactions/200')
+        uri.user = Mondido::Credentials::MERCHANT_ID.to_s
+        uri.password = Mondido::Credentials::PASSWORD.to_s
+        json_transaction = File.read('spec/stubs/transaction.json')
+        @transacion_hash = JSON.parse(json_transaction)
+        stub_request(:get, uri.to_s)
+          .to_return(status: 200, body: json_transaction, headers: {})
+
+        @transaction = Mondido::CreditCard::Transaction.get(200)
+      end
+
+      it 'returns a CreditCard::Transaction' do
+        expect(@transaction).to be_an_instance_of(Mondido::CreditCard::Transaction)
+      end
+
+      it 'has the correct amount' do
+        expect(@transaction.amount).to eq(@transacion_hash['amount'])
+      end
+
+      it 'has the correct payment_ref' do
+        expect(@transaction.payment_ref).to eq(@transacion_hash['payment_ref'])
+      end
+
+    end
+
+    context 'invalid call' do
+
+    end
+
+  end
+
+  context 'create transaction' do
+
+    before(:all) do
+      @attributes = {
+        amount: '1.00',
+        currency: 'sek',
+        card_number: '4111 1111 1111 1111',
+        card_holder: 'Jane Doe',
+        card_cvv: '200',
+        card_expiry: '1120',
+        card_type: 'visa',
+        payment_ref: "#{Time.now.to_i.to_s(16)}#{Time.now.usec.to_s[0,3]}"
+      }
+    end
+
+    context 'invalid transaction' do
+
+      it 'raises ValidationException errors.currency.missing' do
+        expect{
+          Mondido::CreditCard::Transaction.create(@attributes.except(:currency))
+        }.to raise_error(Mondido::Exceptions::ValidationException, 'errors.currency.missing')
+      end
+
+      it 'raises ValidationException errors.amount.missing' do
+        expect{
+          Mondido::CreditCard::Transaction.create(@attributes.except(:amount))
+        }.to raise_error(Mondido::Exceptions::ValidationException, 'errors.amount.missing')
+      end
+
+      it 'raises ValidationException errors.card_number.missing' do
+        expect{
+          Mondido::CreditCard::Transaction.create(@attributes.except(:card_number))
+        }.to raise_error(Mondido::Exceptions::ValidationException, 'errors.card_number.missing')
+      end
+
+      it 'raises ValidationException errors.card_cvv.missing' do
+        expect{
+          Mondido::CreditCard::Transaction.create(@attributes.except(:card_cvv))
+        }.to raise_error(Mondido::Exceptions::ValidationException, 'errors.card_cvv.missing')
+      end
+
+      it 'raises ValidationException errors.card_expiry.missing' do
+        expect{
+          Mondido::CreditCard::Transaction.create(@attributes.except(:card_expiry))
+        }.to raise_error(Mondido::Exceptions::ValidationException, 'errors.card_expiry.missing')
+      end
+
+      it 'raises ValidationException errors.card_type.missing' do
+        expect{
+          Mondido::CreditCard::Transaction.create(@attributes.except(:card_type))
+        }.to raise_error(Mondido::Exceptions::ValidationException, 'errors.card_type.missing')
+      end
+
+      it 'raises ValidationException errors.payment_ref.missing' do
+        expect{
+          Mondido::CreditCard::Transaction.create(@attributes.except(:payment_ref))
+        }.to raise_error(Mondido::Exceptions::ValidationException, 'errors.payment_ref.missing')
+      end
+
+      it 'raises ApiException errors.payment.declined' do
+        uri = URI.parse(Mondido::Config::URI + '/transactions')
+        uri.user = Mondido::Credentials::MERCHANT_ID.to_s
+        uri.password = Mondido::Credentials::PASSWORD.to_s
+        json_transaction = File.read('spec/stubs/transaction.json')
+        stub_request(:post, uri.to_s)
+          .with(body: hash_including({card_cvv: '201'}))
+          .to_return(status: 400, body: '{"name": "errors.payment.declined", "code": 129, "description": "Payment declined" }', headers: {})
+
+        attributes = @attributes.dup
+        attributes[:card_cvv] = '201'
+
+        expect{
+          transaction = Mondido::CreditCard::Transaction.create(attributes)
+        }.to raise_error(Mondido::Exceptions::ApiException, 'errors.payment.declined')
+      end
+
+    end
+    
+    context 'valid transaction' do
+
+      before(:all) do
+        uri = URI.parse(Mondido::Config::URI + '/transactions')
+        uri.user = Mondido::Credentials::MERCHANT_ID.to_s
+        uri.password = Mondido::Credentials::PASSWORD.to_s
+        json_transaction = File.read('spec/stubs/transaction.json')
+
+        stub_request(:post, uri.to_s)
+          .with(body: hash_including({card_cvv: '200'}))
+          .to_return(status: 200, body: json_transaction, headers: {})
+
+        @transaction = Mondido::CreditCard::Transaction.create(@attributes)
+      end
+
+      it 'is approved' do
+        expect(@transaction.status).to eq('approved')
+      end
+
+      it 'has no errors' do
+        expect(@transaction.errors).to be_empty
+      end
+
+    end
+  end
+end
+

@@ -1,0 +1,16 @@
+{
+  "id" : 300,
+  "currency" : "SEK",
+  "customer" : {
+    "id" : 9
+  },
+  "card_holder" : "Jane Doe",
+  "created_at" : "2014-07-24T14:36:44Z",
+  "expires" : "2015-09-30T23:59:59Z",
+  "token" : "11406212604317313",
+  "merchant_id" : 1,
+  "card_number" : "411111******1111",
+  "ref" : null,
+  "status" : "active",
+  "test" : true
+}
