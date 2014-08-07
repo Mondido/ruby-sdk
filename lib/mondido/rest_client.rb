@@ -21,11 +21,18 @@ module Mondido
         when :post
           request = Net::HTTP::Post.new(uri.path)
         when :get
-          request = Net::HTTP::Get.new(uri.path)
+          if args.has_key?(:query)
+            query = "?#{args[:query]}"
+          else
+            query = ''
+          end
+          request = Net::HTTP::Get.new(uri.path + query)
       end
+
       request.basic_auth(Mondido::Credentials.merchant_id, Mondido::Credentials.password)
       request.set_form_data(args[:data]) if args.has_key?(:data)
       response = http.start { |http| http.request(request) }
+
       unless (200..299).include?(response.code.to_i)
         error_name = JSON.parse(response.body)['name'] rescue nil || 'errors.generic'
         raise Mondido::Exceptions::ApiException.new(error_name)
@@ -39,9 +46,9 @@ module Mondido
       call_api(uri: uri_string)
     end
 
-    def self.all(method, filter)
+    def self.all(method, filter={})
       uri_string = [Mondido::Config::URI, method.to_s].join('/')
-      call_api(uri: uri_string, data: filter)
+      call_api(uri: uri_string, query: filter.to_query)
     end
 
   end
