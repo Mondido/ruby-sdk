@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = Mondido::VERSION
   s.authors     = ["Robert Falkén"]
   s.email       = ["falken@mondido.com"]
-  s.homepage    = "TODO"
-  s.summary     = "Library for making payments with Mondido"
-  s.description = "TODO: Description of Mondido."
+  s.homepage    = "https://github.com/Mondido/ruby-sdk"
+  s.summary     = "SDK for consuming the Mondido API"
+  s.description = "Library for making payments with Mondido, visit https://mondido.com to sign up for an account."
   s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
