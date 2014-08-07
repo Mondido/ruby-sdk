@@ -12,8 +12,8 @@ end
 # Monkeymock the config class
 module Mondido
   class Credentials
-    MERCHANT_ID = 1
-    SECRET = 'secret'
-    PASSWORD = 'password'
+    def self.merchant_id; 1; end
+    def self.secret; 'secret'; end
+    def self.password; 'password'; end
   end
 end

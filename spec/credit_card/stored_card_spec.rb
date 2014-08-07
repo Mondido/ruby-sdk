@@ -5,8 +5,8 @@ describe Mondido::CreditCard::StoredCard do
     context 'valid call' do
       before(:all) do
         uri = URI.parse(Mondido::Config::URI + '/stored_cards/300')
-        uri.user = Mondido::Credentials::MERCHANT_ID.to_s
-        uri.password = Mondido::Credentials::PASSWORD.to_s
+        uri.user = Mondido::Credentials.merchant_id.to_s
+        uri.password = Mondido::Credentials.password.to_s
         json_stored_card = File.read('spec/stubs/stored_card.json')
         @stored_card_hash = JSON.parse(json_stored_card)
         stub_request(:get, uri.to_s)
@@ -37,8 +37,8 @@ describe Mondido::CreditCard::StoredCard do
   context '#create' do
     before(:all) do
       uri = URI.parse(Mondido::Config::URI + '/stored_cards')
-      uri.user = Mondido::Credentials::MERCHANT_ID.to_s
-      uri.password = Mondido::Credentials::PASSWORD.to_s
+      uri.user = Mondido::Credentials.merchant_id.to_s
+      uri.password = Mondido::Credentials.password.to_s
       json_transaction = File.read('spec/stubs/stored_card.json')
       @transaction_hash = JSON.parse(json_transaction)
 

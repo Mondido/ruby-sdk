@@ -5,8 +5,8 @@ describe Mondido::CreditCard::Transaction do
   context 'list transactions' do
     before(:all) do
       uri = URI.parse(Mondido::Config::URI + '/transactions')
-      uri.user = Mondido::Credentials::MERCHANT_ID.to_s
-      uri.password = Mondido::Credentials::PASSWORD.to_s
+      uri.user = Mondido::Credentials.merchant_id.to_s
+      uri.password = Mondido::Credentials.password.to_s
       json_transactions = File.read('spec/stubs/transactions.json')
       @transactions_array = JSON.parse(json_transactions)
 
@@ -25,8 +25,8 @@ describe Mondido::CreditCard::Transaction do
   context 'get transaction' do
     before(:all) do
       uri = URI.parse(Mondido::Config::URI + '/transactions/200')
-      uri.user = Mondido::Credentials::MERCHANT_ID.to_s
-      uri.password = Mondido::Credentials::PASSWORD.to_s
+      uri.user = Mondido::Credentials.merchant_id.to_s
+      uri.password = Mondido::Credentials.password.to_s
       json_transaction = File.read('spec/stubs/transaction.json')
       @transaction_hash = JSON.parse(json_transaction)
 
@@ -65,8 +65,8 @@ describe Mondido::CreditCard::Transaction do
       before(:all) do
 
         uri = URI.parse(Mondido::Config::URI + '/transactions/201')
-        uri.user = Mondido::Credentials::MERCHANT_ID.to_s
-        uri.password = Mondido::Credentials::PASSWORD.to_s
+        uri.user = Mondido::Credentials.merchant_id.to_s
+        uri.password = Mondido::Credentials.password.to_s
 
         json_error = {
           code: 128,
@@ -147,8 +147,8 @@ describe Mondido::CreditCard::Transaction do
 
       it 'raises ApiException errors.payment.declined' do
         uri = URI.parse(Mondido::Config::URI + '/transactions')
-        uri.user = Mondido::Credentials::MERCHANT_ID.to_s
-        uri.password = Mondido::Credentials::PASSWORD.to_s
+        uri.user = Mondido::Credentials.merchant_id.to_s
+        uri.password = Mondido::Credentials.password.to_s
         json_transaction = File.read('spec/stubs/transaction.json')
         stub_request(:post, uri.to_s)
           .with(body: hash_including({card_cvv: '201'}))
@@ -168,8 +168,8 @@ describe Mondido::CreditCard::Transaction do
 
       before(:all) do
         uri = URI.parse(Mondido::Config::URI + '/transactions')
-        uri.user = Mondido::Credentials::MERCHANT_ID.to_s
-        uri.password = Mondido::Credentials::PASSWORD.to_s
+        uri.user = Mondido::Credentials.merchant_id.to_s
+        uri.password = Mondido::Credentials.password.to_s
         json_transaction = File.read('spec/stubs/transaction.json')
 
         stub_request(:post, uri.to_s)

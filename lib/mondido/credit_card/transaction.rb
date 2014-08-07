@@ -63,7 +63,7 @@ module Mondido
       end
 
       def set_hash!
-        unhashed = [Mondido::Credentials::MERCHANT_ID, payment_ref, amount, currency, Mondido::Credentials::SECRET]
+        unhashed = [Mondido::Credentials.merchant_id, payment_ref, amount, currency, Mondido::Credentials.secret]
         self.hash = Digest::MD5.hexdigest(unhashed.join)
       end
 

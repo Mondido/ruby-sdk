@@ -23,7 +23,7 @@ module Mondido
         when :get
           request = Net::HTTP::Get.new(uri.path)
       end
-      request.basic_auth(Mondido::Credentials::MERCHANT_ID, Mondido::Credentials::PASSWORD)
+      request.basic_auth(Mondido::Credentials.merchant_id, Mondido::Credentials.password)
       request.set_form_data(args[:data]) if args.has_key?(:data)
       response = http.start { |http| http.request(request) }
       unless (200..299).include?(response.code.to_i)

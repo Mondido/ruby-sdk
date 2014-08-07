@@ -5,8 +5,8 @@ describe Mondido::CreditCard::Refund do
     context 'valid' do
       before(:all) do
         uri = URI.parse(Mondido::Config::URI + '/refunds')
-        uri.user = Mondido::Credentials::MERCHANT_ID.to_s
-        uri.password = Mondido::Credentials::PASSWORD.to_s
+        uri.user = Mondido::Credentials.merchant_id.to_s
+        uri.password = Mondido::Credentials.password.to_s
         json_refund = File.read('spec/stubs/refund.json')
         @refund_hash = JSON.parse(json_refund)
 
