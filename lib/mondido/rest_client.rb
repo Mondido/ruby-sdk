@@ -15,7 +15,7 @@ module Mondido
       require 'net/https'
       uri = URI.parse args[:uri]
       http = Net::HTTP.new(uri.host, uri.port)
-      # http.use_ssl = true
+      http.use_ssl = true
       http_method = args[:http_method] || :get
       case http_method
         when :post
