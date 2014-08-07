@@ -12,6 +12,7 @@ module Mondido
                     :card_expiry,
                     :card_type,
                     :payment_ref,
+                    :customer_ref,
                     :metadata,
                     :items,
                     :created_at,
