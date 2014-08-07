@@ -58,6 +58,12 @@ module Mondido
 
 
 
+      def self.create(attributes={})
+        metadata = attributes[:metadata]        
+        metadata = metadata.to_json if metadata && metadata.respond_to?(:to_json)
+        attributes[:metadata] = metadata
+        super(attributes)
+      end
 
       def initialize(attributes={})
         super
