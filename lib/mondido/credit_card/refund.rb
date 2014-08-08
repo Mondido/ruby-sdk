@@ -22,6 +22,10 @@ module Mondido
       validates :reason,
                 presence: { message: 'errors.reason.missing' },
                 strict: Mondido::Exceptions::ValidationException
+
+      def self.delete(id)
+        raise Mondido::Exceptions::NotApplicable.new 'Can not delete Transaction'
+      end
     end
   end
 end

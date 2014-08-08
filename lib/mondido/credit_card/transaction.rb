@@ -2,6 +2,7 @@ module Mondido
   module CreditCard
     class Transaction < BaseModel
       include ActiveModel::Model
+      include Mondido::BaseBehaviour
 
       attr_accessor :id,
                     :amount,
@@ -57,6 +58,9 @@ module Mondido
                 strict: Mondido::Exceptions::ValidationException
 
 
+      def self.delete(id)
+        raise Mondido::Exceptions::NotApplicable.new 'Can not delete Transaction'
+      end
 
       def self.create(attributes={})
         metadata = attributes[:metadata]        

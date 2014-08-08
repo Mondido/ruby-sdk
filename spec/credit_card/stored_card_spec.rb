@@ -72,4 +72,22 @@ describe Mondido::CreditCard::StoredCard do
 
     end
   end
+
+  context '#delete' do
+    before(:all) do
+      uri = URI.parse(Mondido::Config::URI + '/stored_cards/1')
+      uri.user = Mondido::Credentials.merchant_id.to_s
+      uri.password = Mondido::Credentials.password.to_s
+      json_stored_card = File.read('spec/stubs/stored_card.json')
+      @stored_card_hash = JSON.parse(json_stored_card)
+
+      stub_request(:delete, uri.to_s)
+        .to_return(status: 200, body: json_stored_card, headers: {})
+    end
+
+    it 'is a Mondido::CreditCard::StoredCard' do
+      stored_card = Mondido::CreditCard::StoredCard.delete(1)
+      expect(stored_card).to be_an_instance_of(Mondido::CreditCard::StoredCard)
+    end
+  end
 end

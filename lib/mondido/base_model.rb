@@ -62,6 +62,14 @@ module Mondido
       end
     end
 
+    # @param id [Integer]
+    # @return [Mondido::*]
+    def self.delete(id)
+      response = Mondido::RestClient.delete(pluralized, id)
+      object = self.new
+      object.update_from_response(JSON.parse(response.body))
+    end
+
     private
 
     # @return [String]

@@ -1,6 +1,6 @@
 module Mondido
   module Exceptions
-    class MissingFile < StandardError
+    class NotApplicable < StandardError
     end
   end
 end

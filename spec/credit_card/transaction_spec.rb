@@ -2,16 +2,23 @@ require 'spec_helper'
 
 describe Mondido::CreditCard::Transaction do
 
+  context '#delete' do
+    it 'raises NotApplicable' do
+      expect{
+        Mondido::CreditCard::Transaction.delete(1)
+      }.to raise_error(Mondido::Exceptions::NotApplicable)
+    end
+  end
+
   context 'list transactions' do
     before(:all) do
-      uri = URI.parse(Mondido::Config::URI + '/transactions')
+      uri = URI.parse(Mondido::Config::URI + '/transactions?limit=2&offset=1')
       uri.user = Mondido::Credentials.merchant_id.to_s
       uri.password = Mondido::Credentials.password.to_s
       json_transactions = File.read('spec/stubs/transactions.json')
       @transactions_array = JSON.parse(json_transactions)
 
       stub_request(:get, uri.to_s)
-        .with(body: {limit: '2', offset: '1'})
         .to_return(status: 200, body: json_transactions, headers: {})
 
       @transactions = Mondido::CreditCard::Transaction.all(limit: 2, offset: 1)

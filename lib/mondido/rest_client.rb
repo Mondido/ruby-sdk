@@ -27,6 +27,8 @@ module Mondido
             query = ''
           end
           request = Net::HTTP::Get.new(uri.path + query)
+        when :delete
+          request = Net::HTTP::Delete.new(uri.path)
       end
 
       request.basic_auth(Mondido::Credentials.merchant_id, Mondido::Credentials.password)
@@ -44,6 +46,11 @@ module Mondido
     def self.get(method, id=nil)
       uri_string = [Mondido::Config::URI, method.to_s, id.to_s].join('/')
       call_api(uri: uri_string)
+    end
+
+    def self.delete(method, id=nil)
+      uri_string = [Mondido::Config::URI, method.to_s, id.to_s].join('/')
+      call_api(uri: uri_string, http_method: :delete)
     end
 
     def self.all(method, filter={})

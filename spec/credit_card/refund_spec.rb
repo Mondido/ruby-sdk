@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe Mondido::CreditCard::Refund do
+  context '#delete' do
+    it 'raises NotApplicable' do
+      expect{
+        Mondido::CreditCard::Refund.delete(1)
+      }.to raise_error(Mondido::Exceptions::NotApplicable)
+    end
+  end
+
   context 'create' do
     context 'valid' do
       before(:all) do
