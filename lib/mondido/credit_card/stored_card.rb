@@ -16,7 +16,8 @@ module Mondido
                     :test,
                     :status,
                     :customer,
-                    :hash
+                    :hash,
+                    :token
 
       validates :currency,
                 presence: { message: 'errors.currency.missing' }
