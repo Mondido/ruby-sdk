@@ -24,7 +24,8 @@ module Mondido
     def self.setup
       config_file = File.join(Rails.root, 'config', 'mondido.yml')
       if File.exist?(config_file)
-        yaml = YAML.load(File.read(config_file))
+        template = ERB.new File.read(config_file)
+        yaml = YAML.load template.result(binding)
         @@merchant_id = yaml['merchant_id'] 
         @@secret = yaml['secret'] 
         @@password = yaml['password'] 
