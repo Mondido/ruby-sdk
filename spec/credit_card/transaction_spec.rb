@@ -66,6 +66,34 @@ describe Mondido::CreditCard::Transaction do
         expect(@transaction.payment_ref).to eq(@transaction_hash['payment_ref'])
       end
 
+      it 'generates the correct hash' do
+        transaction = Mondido::CreditCard::Transaction.new({
+          :merchant_id => Mondido::Credentials.merchant_id.to_s,
+          :payment_ref => "PaymentRefValue",
+          :customer_ref => "CustomerRefValue",
+          :amount => "10.00",
+          :currency => "sek",
+          :test => true,
+          :secret => Mondido::Credentials.secret.to_s
+        })
+
+        transaction.set_hash!
+
+        # Calculate hash
+        unhashed = [
+          Mondido::Credentials.merchant_id.to_s,
+          "PaymentRefValue",
+          "CustomerRefValue",
+          "10.00",
+          "sek",
+          "test",
+          Mondido::Credentials.secret
+        ].map(&:to_s)
+        hash = Digest::MD5.hexdigest(unhashed.join)
+
+        expect(transaction.hash).to eq(hash)
+      end
+
     end
 
     context 'invalid call' do

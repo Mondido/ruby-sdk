@@ -35,6 +35,7 @@ module Mondido
       object = self.new(attributes)
       object.valid? # Will raise exception if validation fails
 
+      object.set_merchant_id! if object.respond_to? :set_merchant_id!
       object.set_hash! if object.respond_to? :set_hash!
 
       response = Mondido::RestClient.process(object)

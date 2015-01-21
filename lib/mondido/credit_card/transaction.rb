@@ -36,7 +36,10 @@ module Mondido
                     :error_url,
                     :refund,
                     :customer,
-                    :href
+                    :store_card,
+                    :href,
+                    :plan_id,
+                    :process
 
       validates :currency,
                 presence: { message: 'errors.currency.missing' },
@@ -82,6 +85,12 @@ module Mondido
 
       def initialize(attributes={})
         super
+      end
+
+      def set_merchant_id!
+        unless self.merchant_id
+          self.merchant_id = Mondido::Credentials.merchant_id
+        end
       end
 
       def set_hash!
