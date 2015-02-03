@@ -27,7 +27,19 @@ module Mondido
                     :customer,
                     :subscription,
                     :payment_details,
-                    :hash
+                    :hash,
+                    :webhooks,
+                    :payment_request,
+                    :template_id,
+                    :error,
+                    :success_url,
+                    :error_url,
+                    :refund,
+                    :customer,
+                    :store_card,
+                    :href,
+                    :plan_id,
+                    :process
 
       validates :currency,
                 presence: { message: 'errors.currency.missing' },
@@ -63,9 +75,11 @@ module Mondido
       end
 
       def self.create(attributes={})
-        metadata = attributes[:metadata]        
-        metadata = metadata.to_json if metadata && metadata.respond_to?(:to_json)
-        attributes[:metadata] = metadata
+        ['metadata', 'webhooks'].each do |a|
+          attribute = attributes[:"#{a}"]
+          attribute = attribute.to_json if attribute && attribute.respond_to?(:to_json)
+          attributes[:"#{a}"] = attribute
+        end
         super(attributes)
       end
 
@@ -73,8 +87,22 @@ module Mondido
         super
       end
 
+      def set_merchant_id!
+        unless self.merchant_id
+          self.merchant_id = Mondido::Credentials.merchant_id
+        end
+      end
+
       def set_hash!
-        unhashed = [Mondido::Credentials.merchant_id, payment_ref, customer_ref, amount, currency, Mondido::Credentials.secret].map(&:to_s)
+        unhashed = [
+          Mondido::Credentials.merchant_id,
+          payment_ref,
+          customer_ref,
+          amount,
+          currency,
+          ( (test) ? "test" : "" ),
+          Mondido::Credentials.secret
+        ].map(&:to_s)
         self.hash = Digest::MD5.hexdigest(unhashed.join)
       end
 
